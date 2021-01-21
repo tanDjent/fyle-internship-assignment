@@ -1,13 +1,61 @@
+.title {
+  background: black !important;
+  color: white;
+
+  width: 100%;
+}
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background: #1c1c1c !important;
+  color: white !important;
+}
+.footer {
+  color: white;
+  display: flex;
+  height: 100px;
+  background-color: #1c1c1c;
+  justify-content: center;
+}
+.table-component {
+  font-size: 30px;
+}
+.city-selection {
+  margin-left: 1rem;
+  max-width: 200px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.search-box {
+  margin-left: 1rem;
+  max-width: 400px;
+  border-radius: 2rem !important;
+  padding: 1rem;
+  outline: none;
+  overflow: hidden;
+  margin-right: 2rem;
+}
+
+.table-title {
+  display: flex;
+  margin-top: 3rem;
+  justify-content: center;
+  font-size: 40px;
+}
+.branch-table {
+  color: white !important;
+  border: 1px solid white;
+  border-spacing: 50px 0;
+}
+.branch-table tr {
+  text-align: center;
+}
+.branch-table tr td {
+  text-align: center;
+}
+.loader {
+  height: calc(100vh - 10rem);
+}
+.pagination {
+  justify-content: center;
+}
+.pointer {
+  cursor: pointer;
 }
