@@ -43,8 +43,8 @@ const TableComponent = () => {
       setTableData(JSON.parse(localStorage.getItem("favourites")));
     } else setTableData(lastTableData);
   }, [checkboxValue]);
-  useEffect(async () => {
-    await api({
+  useEffect(() => {
+    api({
       url:
         proxyurl +
         cityAPICall +
@@ -61,8 +61,8 @@ const TableComponent = () => {
       .catch((error) => console.log(error));
   }, [currentCity]);
   useEffect(async () => {
-    if (searchQuery && searchQuery != "") {
-      await api({
+    if (searchQuery && searchQuery !== "") {
+      api({
         url:
           proxyurl +
           searchAPICall +
@@ -78,7 +78,7 @@ const TableComponent = () => {
         })
         .catch((error) => console.log(error));
     } else {
-      await api({
+      api({
         url:
           proxyurl +
           cityAPICall +
@@ -95,9 +95,9 @@ const TableComponent = () => {
         .catch((error) => console.log(error));
     }
   }, [limit]);
-  useEffect(async () => {
-    if (searchQuery && searchQuery != "") {
-      await api({
+  useEffect(() => {
+    if (searchQuery && searchQuery !== "") {
+      api({
         url:
           proxyurl +
           searchAPICall +
@@ -113,7 +113,7 @@ const TableComponent = () => {
         })
         .catch((error) => console.log(error));
     } else {
-      await api({
+      api({
         url:
           proxyurl +
           cityAPICall +
@@ -130,9 +130,9 @@ const TableComponent = () => {
         .catch((error) => console.log(error));
     }
   }, [offset]);
-  useEffect(async () => {
-    if (searchQuery && searchQuery != "") {
-      await api({
+  useEffect(() => {
+    if (searchQuery && searchQuery !== "") {
+      api({
         url:
           proxyurl +
           searchAPICall +
@@ -148,7 +148,7 @@ const TableComponent = () => {
         })
         .catch((error) => console.log(error));
     } else {
-      await api({
+      api({
         url:
           proxyurl +
           cityAPICall +
@@ -324,11 +324,10 @@ const TableComponent = () => {
             </PaginationItem>
           </Pagination>
           <Form>
-            <FormGroup style={{ display: "flex" }}>
-              <Label style={{ marginRight: "5rem" }} for='limitChange'>
-                Rows / Page
-              </Label>
+            <FormGroup style={{ display: "flex", alignItems: "center" }}>
+              <Label for='limitChange'>Rows / Page: </Label>
               <Input
+                style={{ width: "10%" }}
                 type='select'
                 name='limitChange'
                 id='limitChange'
@@ -342,10 +341,16 @@ const TableComponent = () => {
                 <option>25</option>
                 <option>50</option>
               </Input>
-            </FormGroup>
-            <FormGroup check style={{ marginLeft: "auto" }}>
-              <Label check>
+              <Label
+                style={{
+                  marginLeft: "auto",
+                  justifyContent: "center",
+                  marginRight: "200px",
+                }}
+                check
+              >
                 <Input
+                  style={{ height: "40px", width: "50px", marginLeft: "15rem" }}
                   onChange={() => setCheckboxValue(!checkboxValue)}
                   type='checkbox'
                 />{" "}
