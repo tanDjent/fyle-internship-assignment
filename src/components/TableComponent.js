@@ -9,6 +9,7 @@ import {
   Pagination,
   PaginationItem,
   PaginationLink,
+  Alert,
 } from "reactstrap";
 import { cityAPICall, searchAPICall } from "../shared/APICalls";
 import { useHistory } from "react-router-dom";
@@ -222,8 +223,9 @@ const TableComponent = () => {
                   return (
                     <tr
                       className='pointer'
-                      onClick={() => {
-                        handleTableClick(data);
+                      onClick={(e) => {
+                        if (e.target.nodeName !== "BUTTON")
+                          handleTableClick(data);
                       }}
                       key={index}
                     >
@@ -240,33 +242,24 @@ const TableComponent = () => {
                             var fav = JSON.parse(
                               localStorage.getItem("favourites")
                             );
-                            console.log(fav);
+
                             if (fav) {
-                              if (fav.constructor === arrayConstructor) {
-                                if (fav.some((item) => item.ifsc === data.ifsc))
-                                  alert("Already a favourite");
-                                else fav.push(data);
-                              } else {
-                                console.log(fav);
-                                console.log(data);
-                                if (fav.ifsc === data.ifsc)
-                                  alert("Already a favourite");
-                                else {
-                                  var favList = [];
-                                  favList.push(fav);
-                                  favList.push(data);
-                                  fav = favList;
-                                }
-                              }
+                              if (fav.some((item) => item.ifsc === data.ifsc))
+                                alert("Already a favourite");
+                              else fav.push(data);
                               localStorage.setItem(
                                 "favourites",
                                 JSON.stringify(fav)
                               );
+                              alert("Added to favourites");
                             } else {
+                              var L = [];
+                              L.push(data);
                               localStorage.setItem(
                                 "favourites",
-                                JSON.stringify(data)
+                                JSON.stringify(L)
                               );
+                              alert("Added to favourites");
                             }
                           }}
                         >
@@ -278,6 +271,8 @@ const TableComponent = () => {
                 })}
               </tbody>
             </Table>
+          ) : checkboxValue ? (
+            <div style={{ justifyContent: "center" }}>No favourite exists</div>
           ) : (
             <div className='d-flex justify-content-center align-items-center loader'>
               <div className='spinner-grow' role='status'>
@@ -363,14 +358,5 @@ const TableComponent = () => {
     </div>
   );
 };
-function debounce(fn, ms) {
-  let timer;
-  return (_) => {
-    clearTimeout(timer);
-    timer = setTimeout((_) => {
-      timer = null;
-      fn.apply(this, arguments);
-    }, ms);
-  };
-}
+
 export default TableComponent;
