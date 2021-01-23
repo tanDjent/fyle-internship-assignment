@@ -244,25 +244,16 @@ const TableComponent = () => {
                             );
 
                             if (fav) {
-                              if (fav.constructor === arrayConstructor) {
-                                if (fav.some((item) => item.ifsc === data.ifsc))
-                                  alert("Already a favourite");
-                                else fav.push(data);
-                              } else {
-                                if (fav.ifsc === data.ifsc)
-                                  alert("Already a favourite");
-                                else {
-                                  var favList = [];
-                                  favList.push(fav);
-                                  favList.push(data);
-                                  fav = favList;
-                                  alert("Added to favourites");
-                                }
+                              if (fav.some((item) => item.ifsc === data.ifsc))
+                                alert("Already a favourite");
+                              else {
+                                fav.push(data);
+                                localStorage.setItem(
+                                  "favourites",
+                                  JSON.stringify(fav)
+                                );
+                                alert("Added to favourites");
                               }
-                              localStorage.setItem(
-                                "favourites",
-                                JSON.stringify(fav)
-                              );
                             } else {
                               var L = [];
                               L.push(data);
